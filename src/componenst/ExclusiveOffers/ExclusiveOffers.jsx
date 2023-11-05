@@ -12,7 +12,7 @@ const ExclusiveOffers = () => {
     },[])
     return(
         <div>
-            <div className="mb-10 "><p className="text-center text-5xl font-bold capitalize">Exclusive Offers</p></div>
+            <div className="mb-10 "><p className="text-center text-5xl font-bold capitalize"><span>Exclusive</span> <span className="text-green-500">Offers</span></p></div>
              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 {
                     data.map(offer=><ExclusiveOffer key={offer._id} offer={offer} />)
