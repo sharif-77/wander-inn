@@ -5,12 +5,15 @@ import Rooms from "../Pages/Rooms/Rooms";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import Login from './../Pages/Login/Login';
 import Register from './../Pages/Register/Register';
+import PrivetRoute from './../PrivetRoute/PrivetRoute';
+import Error from "../Pages/Error/Error";
 
 
 const router = createBrowserRouter([
     {
         path:'/',
         element:<Layout/>,
+        errorElement:<Error/>,
         children:[
             {
                 path:'/',
@@ -24,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/myBookings',
-                element:<MyBookings/>
+                element:<PrivetRoute><MyBookings/></PrivetRoute>
 
             },
             {

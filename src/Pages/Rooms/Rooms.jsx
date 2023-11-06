@@ -1,11 +1,14 @@
 import {Helmet} from "react-helmet";
+import FeaturedRooms from "../../componenst/FeaturedRooms/FeaturedRooms";
 
 const Rooms = () => {
     return(
         <div>
             <Helmet><title>Rooms</title></Helmet>
 
-             <p> HELLO I Am Rooms </p>
+             <main className="w-4/5 mx-auto">
+             <FeaturedRooms/>
+             </main>
         </div>
     )}
 export default Rooms;

@@ -1,0 +1,63 @@
+[
+    {
+      "name": "Cozy Retreat Suite",
+      "type": "Standard",
+      "price": 129.99,
+      "description": "A comfortable and affordable room with a cozy ambiance, perfect for a quick getaway.",
+      "capacity": 2,
+      "roomSize": 300,
+      "image": "https://i.ibb.co/5Ljp2Cx/sasha-kaunas-Fk9d0cx-Yq-C4-unsplash.jpg",
+      "availability": 10
+    },
+    {
+      "name": "Luxury Ocean View Room",
+      "type": "Luxury",
+      "price": 299.99,
+      "description": "Experience a breathtaking ocean view from this luxurious room with all the amenities you need.",
+      "capacity": 2,
+      "roomSize": 500,
+      "image": "https://i.ibb.co/nLv9zZV/roberto-nickson-emqn-SQw-QQDo-unsplash.jpg",
+      "availability": 5
+    },
+    {
+      "name": "Family Paradise Suite",
+      "type": "Suite",
+      "price": 199.99,
+      "description": "A spacious suite designed for families, featuring a separate living area and a kitchenette.",
+      "capacity": 4,
+      "roomSize": 600,
+      "image": "https://i.ibb.co/7tzT5BM/mky-moody-AUF6-Gl4wwz-A-unsplash.jpg",
+      "availability": 3
+    },
+    {
+      "name": "Executive Business Room",
+      "type": "Business",
+      "price": 149.99,
+      "description": "A well-appointed room tailored for business travelers, with a dedicated workspace and high-speed internet.",
+      "capacity": 2,
+      "roomSize": 350,
+      "image": "https://i.ibb.co/xmNTzML/visualsofdana-T5p-L6ci-En-I-unsplash.jpg",
+      "availability": 8
+    },
+    {
+      "name": "Romantic Honeymoon Suite",
+      "type": "Suite",
+      "price": 249.99,
+      "description": "Celebrate your love in style with a romantic suite featuring a private balcony and a heart-shaped Jacuzzi.",
+      "capacity": 2,
+      "roomSize": 400,
+      "image": "https://i.ibb.co/Yhb31kC/vojtech-bruzek-Yrxr3bs-Pd-S0-unsplash.jpg",
+      "availability": 2
+    },
+    {
+      "name": "Nature Lover's Cabin",
+      "type": "Cabin",
+      "price": 179.99,
+      "description": "Escape to a rustic cabin in the woods, surrounded by nature and all the comforts of home.",
+      "capacity": 2,
+      "roomSize": 800,
+      "image": "https://i.ibb.co/qj6FsPt/frames-for-your-heart-Fqqi-Av-Jejto-unsplash.jpg",
+      "availability": 6
+    }
+  ]
+  
