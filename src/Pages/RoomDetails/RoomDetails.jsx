@@ -1,12 +1,18 @@
 import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from './../../AuthProvider/AuthProvider';
 
 const RoomDetails = () => {
+  const {user}=useContext(AuthContext)
   const [startDate, setStartDate] = useState(new Date());
   const room = useLoaderData();
-  console.log(room);
+  const {_id,name,type,price,description,capacity,roomSize,image,availability}=room
+  const email=user?.email
+  const forSendData={
+    name,type,price,description,capacity,roomSize,image,availability,email
+  }
   const container = document.createElement('div');
   container.innerHTML=`<div className="w-4/5  mx-auto">
   <div className="card  bg-base-100 shadow-xl">
@@ -38,11 +44,23 @@ const RoomDetails = () => {
       html:container
     }).then((result) => {
       if (result.isConfirmed) {
+
+        fetch("http://localhost:5000/bookings", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(forSendData)
+        })
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+
+
         Swal.fire({
           title: "Booked!",
           text: "Your Booking has been Done",
           icon: "success"
         });
+
+
       }
     });
   }
