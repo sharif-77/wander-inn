@@ -16,9 +16,8 @@ const AuthProvider = ({children}) => {
             setUser(currentUser)
             if (currentUser) {
                 const email={email:currentUser.email}
-                console.log(email);
                 axios.post('http://localhost:5000/jwt',email,{withCredentials:true})
-                .then(res=>console.log(res.data))
+                .then((res)=>{})
 
             }
             setLoading(false)

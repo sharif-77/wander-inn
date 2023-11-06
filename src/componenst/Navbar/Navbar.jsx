@@ -4,7 +4,6 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
     const {user,logOutUser}=useContext(AuthContext)
-    console.log(user);
     return(
         <div className="py-6">
 

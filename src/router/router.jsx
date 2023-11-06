@@ -7,6 +7,7 @@ import Login from './../Pages/Login/Login';
 import Register from './../Pages/Register/Register';
 import PrivetRoute from './../PrivetRoute/PrivetRoute';
 import Error from "../Pages/Error/Error";
+import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
                 path:'/register',
                 element:<Register/>
 
+            },
+            {
+                path:`/roomDetails/:id`,
+                element:<RoomDetails/>,
+                loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+                
             },
 
         ]
