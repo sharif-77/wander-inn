@@ -145,7 +145,7 @@ const RoomDetails = () => {
                   : `btn btn-success text-white`
               }`}
             >
-              Book Now
+              {availability?'Book Now':'Room Unavailable'}
             </button>
           </div>
         </div>
