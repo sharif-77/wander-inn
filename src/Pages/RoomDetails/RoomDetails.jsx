@@ -1,7 +1,9 @@
 import { useLoaderData } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "./../../AuthProvider/AuthProvider";
+import axios from "axios";
+import Review from "../../componenst/Review/Review";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext);
@@ -97,6 +99,15 @@ const RoomDetails = () => {
       }
     });
   };
+  const [data,setData]=useState([])
+
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/reviews?serviceName=${name}`,{withCredentials:true})
+    .then(res=>{
+      setData(res.data) 
+      console.log(res);
+    })
+},[name])
   return (
     <main className="w-4/5  mx-auto">
       <div className="card  bg-base-100 shadow-xl">
@@ -117,7 +128,7 @@ const RoomDetails = () => {
             {" "}
             availability : {room.availability}
           </p>
-          <p className="text-xl capitalize "> Review : {review}</p>
+         
           <input
             type="date"
             name=""
@@ -140,8 +151,14 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      <div>
-        hello
+      <div className="my-20" >
+        <p className="text-center text-3xl uppercase font-bold">Review Of This Room</p>
+       
+       <div className="my-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+       {
+          data.map(review=><Review key={review._id} data={review}  />)
+        }
+       </div>
       </div>
 
 

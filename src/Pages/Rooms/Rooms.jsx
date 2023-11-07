@@ -24,8 +24,8 @@ const Rooms = () => {
    
 
       <main className="w-4/5 mx-auto">
-      <div className="my-10">
-        <select className="font-bold" onChange={handleOrder}   name="select" id="">
+      <div className="my-10 ">
+        <select className="font-bold bg-green-500 px-5 py-2 rounded-md  text-xl text-white" onChange={handleOrder}   name="select" id="">
             <option disabled selected>Sort By Price</option>
             <option value="asc">Lower To Higher</option>
             <option value="desc">Higher To Lower</option>
