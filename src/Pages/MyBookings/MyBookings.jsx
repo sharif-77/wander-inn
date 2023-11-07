@@ -16,7 +16,7 @@ const MyBookings = () => {
         <div className="w-4/5 mx-auto mt-20">
             <Helmet><title>My-Bookings</title></Helmet>
              <main>
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+             <div className="grid grid-cols-1  gap-5">
                 {
                     data.map(room=><MyBooking key={room._id} room={room} />)
                 }

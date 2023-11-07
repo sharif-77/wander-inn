@@ -20,6 +20,7 @@ const RoomDetails = () => {
     review,
   } = room;
   const email = user?.email;
+  const status='booked'
   const forSendData = {
     name,
     type,
@@ -31,6 +32,7 @@ const RoomDetails = () => {
     availability,
     startDate,
     email,
+    status
   };
 
   const container = document.createElement("div");
@@ -76,7 +78,6 @@ const RoomDetails = () => {
           .then((data) => console.log(data));
 
         const afterBooking = availability - 1;
-        console.log(afterBooking);
         const available = { availability: afterBooking };
 
         fetch(`http://localhost:5000/rooms/${_id}`, {
