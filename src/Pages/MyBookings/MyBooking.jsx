@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { AuthContext } from './../../AuthProvider/AuthProvider';
 
 const MyBooking = ({room}) => {
-  const {_id,startDate,status,availability}=room
+  const {user}=useContext(AuthContext)
+  console.log(user);
+  const {_id,name,startDate,status,availability}=room
   const makeDateFormat=new Date(startDate)
   const currentDate=new Date()
   const timeDifference = makeDateFormat.getTime() - currentDate.getTime();
@@ -37,7 +41,18 @@ fetch(`http://localhost:5000/status/${_id}`, {
   }
 
   const handleDelete =()=>{
-    fetch(`http://localhost:5000/bookings/${_id}`, {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/bookings/${_id}`, {
           method: "DELETE",
           
         })
@@ -50,7 +65,13 @@ fetch(`http://localhost:5000/status/${_id}`, {
           }
         })
         .catch((res) => console.log(res));
+      
+      }
+    });
+
   }
+
+
   const handleBookingDate = ()=>{
     const updatedDate ={date}
     fetch(`http://localhost:5000/updateDate/${_id}`, {
@@ -69,6 +90,30 @@ fetch(`http://localhost:5000/status/${_id}`, {
   .catch((res) => console.log(res));
   }
 
+  const handleReview = (e)=>{
+    e.preventDefault()
+    const form=e.target
+    const name=form.name.value
+    const serviceName=form.serviceName.value
+    const date=form.date.value
+    const review=form.review.value
+    const ratting=form.ratting.value
+    const dataForSend={
+      name,serviceName,date,review,ratting
+    }
+    fetch("http://localhost:5000/review", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataForSend),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success('Review Success')
+          
+        }
+      });
+  }
 
 
     return (
@@ -83,7 +128,7 @@ fetch(`http://localhost:5000/status/${_id}`, {
             <p className="text-lg">Update Your Booking Date</p>
           <input onChange={(e) => setDate(e.target.value)} defaultValue={startDate} type="date" name="" id="" />
           </div>
-          <div className=" flex gap-2 ">
+          <div className=" flex flex-col md:flex-row gap-2 ">
 
             <button onClick={handleBookingDate} className="btn btn-success text-white">Update Booking Date</button>
             <button onClick={handleCancel}   className="btn btn-success text-white">Cancel</button>
@@ -94,42 +139,65 @@ fetch(`http://localhost:5000/status/${_id}`, {
       {/* card end */}
 
       <div className="">
-      <form  className=" space-y-5">
-        <p className="text-3xl text-center">Give You Feedback</p>
+      <form onSubmit={handleReview}  className=" space-y-3">
+        <p className="text-3xl text-center">Give You Review</p>
           <div className="flex flex-col gap-2">
-            <label htmlFor="Image"> Enter Your Image</label>
+            <label htmlFor="name"> Enter Your Name</label>
             <input
+            defaultValue={user?.displayName}
               className="bg-[#F3F3F3] text-black py-2 px-4 rounded-md"
               type="text"
-              name="Review"
-              id="Image"
-              placeholder="Enter Your Image Url"
+              name="name"
+              id="name"
+              placeholder="Enter Your Name"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="Review"> Enter Your Review</label>
+            <label htmlFor="serviceName"> Service Name</label>
+            <input
+            defaultValue={name}
+              className="bg-[#F3F3F3] text-black py-2 px-4 rounded-md"
+              type="text"
+              name="serviceName"
+              id="serviceName"
+              placeholder="Enter Your Service Name"
+            />
+          </div>
+
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="date">Time stamp</label>
             <input
               className="bg-[#F3F3F3] text-black py-2 px-4 rounded-md"
-              type="email"
-              name="Review"
-              id="Review"
+              type="date"
+              name="date"
+              id="date"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="review"> Enter Your Review</label>
+            <input
+              className="bg-[#F3F3F3] text-black py-2 px-4 rounded-md"
+              type="text"
+              name="review"
+              id="review"
               placeholder="Enter Your Review"
             />
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="Ratting">Give Ratting</label>
+            <label htmlFor="ratting">Give Ratting</label>
             <input
               className="bg-[#F3F3F3] text-black py-2 px-4 rounded-md"
               type="number"
-              name="Ratting"
-              id="Ratting"
+              name="ratting"
+              id="ratting"
               placeholder="Give Ratting Out of 5"
               max={5}
             />
           </div>
           
-          <div className="flex flex-col  ">
+          <div className="flex flex-col   ">
             <button
               className="bg-[#14c898f3] py-2 px-4 mt-5 rounded-md  font-bold"
               type="submit"

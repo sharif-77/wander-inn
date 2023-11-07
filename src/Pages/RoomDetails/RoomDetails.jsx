@@ -98,7 +98,7 @@ const RoomDetails = () => {
     });
   };
   return (
-    <div className="w-4/5  mx-auto">
+    <main className="w-4/5  mx-auto">
       <div className="card  bg-base-100 shadow-xl">
         <figure>
           <img className="w-full  " src={room.image} alt="Shoes" />
@@ -139,7 +139,13 @@ const RoomDetails = () => {
           </div>
         </div>
       </div>
-    </div>
+
+      <div>
+        hello
+      </div>
+
+
+    </main>
   );
 };
 
