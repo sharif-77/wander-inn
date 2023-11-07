@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const FeaturedRoom = ({room}) => {
     return (
@@ -11,7 +12,7 @@ const FeaturedRoom = ({room}) => {
           <p className="capitalize"> roomSize: {room.roomSize} Sq.Ft</p>
           <p className="text-2xl "> price: ${room.price}</p>
           <div className="card-actions ">
-            <button className="btn btn-success text-white">Book Now</button>
+            <Link to={`/roomDetails/${room._id}`} className="btn btn-success text-white">Book Now</Link>
           </div>
         </div>
       </div>
