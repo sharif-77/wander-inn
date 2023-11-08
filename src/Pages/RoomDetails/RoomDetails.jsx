@@ -22,7 +22,7 @@ const RoomDetails = () => {
     review,
   } = room;
   const email = user?.email;
-  const status='booked'
+  const status = "booked";
   const forSendData = {
     name,
     type,
@@ -34,7 +34,7 @@ const RoomDetails = () => {
     availability,
     startDate,
     email,
-    status
+    status,
   };
 
   const container = document.createElement("div");
@@ -60,7 +60,7 @@ const RoomDetails = () => {
 
   const handleBooking = () => {
     if (!availability) {
-      return
+      return;
     }
     Swal.fire({
       text: "You won't be able to revert this!",
@@ -71,7 +71,7 @@ const RoomDetails = () => {
       html: container,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/bookings", {
+        fetch("https://wander-inn-server.vercel.app/bookings", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(forSendData),
@@ -82,7 +82,7 @@ const RoomDetails = () => {
         const afterBooking = availability - 1;
         const available = { availability: afterBooking };
 
-        fetch(`http://localhost:5000/rooms/${_id}`, {
+        fetch(`https://wander-inn-server.vercel.app/rooms/${_id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(available),
@@ -99,15 +99,18 @@ const RoomDetails = () => {
       }
     });
   };
-  const [data,setData]=useState([])
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    axios.get(`http://localhost:5000/reviews?serviceName=${name}`,{withCredentials:true})
-    .then(res=>{
-      setData(res.data) 
-      console.log(res);
-    })
-},[name])
+  useEffect(() => {
+    axios
+      .get(`https://wander-inn-server.vercel.app/reviews?serviceName=${name}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setData(res.data);
+        console.log(res);
+      });
+  }, [name]);
   return (
     <main className="w-4/5  mx-auto">
       <div className="card  bg-base-100 shadow-xl">
@@ -128,7 +131,7 @@ const RoomDetails = () => {
             {" "}
             availability : {room.availability}
           </p>
-         
+
           <input
             type="date"
             name=""
@@ -145,23 +148,23 @@ const RoomDetails = () => {
                   : `btn btn-success text-white`
               }`}
             >
-              {availability?'Book Now':'Room Unavailable'}
+              {availability ? "Book Now" : "Room Unavailable"}
             </button>
           </div>
         </div>
       </div>
 
-      <div className="my-20" >
-        <p className="text-center text-3xl uppercase font-bold">Review Of This Room</p>
-       
-       <div className="my-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
-       {
-          data.map(review=><Review key={review._id} data={review}  />)
-        }
-       </div>
+      <div className="my-20">
+        <p className="text-center text-3xl uppercase font-bold">
+          Review Of This Room
+        </p>
+
+        <div className="my-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {data.map((review) => (
+            <Review key={review._id} data={review} />
+          ))}
+        </div>
       </div>
-
-
     </main>
   );
 };

@@ -1,74 +1,77 @@
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
 import axios from "axios";
-export const AuthContext=createContext() 
+export const AuthContext = createContext();
 
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [mode, setMode] = useState(false);
 
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        const email = { email: currentUser.email };
+        axios
+          .post("https://wander-inn-server.vercel.app/jwt", email, {
+            withCredentials: true,
+          })
+          .then((res) => {});
+      }
+      setLoading(false);
+    });
 
-const AuthProvider = ({children}) => { 
-    const [user,setUser]=useState(null)
-    const [loading,setLoading]=useState(true)
-    const [mode,setMode]=useState(false)
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
-    useEffect(()=>{
-        const unSubscribe=onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
-            if (currentUser) {
-                const email={email:currentUser.email}
-                axios.post('http://localhost:5000/jwt',email,{withCredentials:true})
-                .then((res)=>{})
+  const googleProvider = new GoogleAuthProvider();
+  const signInWithGoogle = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
 
-            }
-            setLoading(false)
-          });
+  const registerUserWithEmailPassword = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const logInWithEmailPassword = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-          return ()=>{
-            unSubscribe()
-          }
+  const update = (currentUser, willUpdate) => {
+    return updateProfile(currentUser, willUpdate);
+  };
+  const logOutUser = () => {
+    return signOut(auth);
+  };
 
-    },[])
-
-    const googleProvider = new GoogleAuthProvider();
-    const signInWithGoogle=()=>{
-       return signInWithPopup(auth, googleProvider)
-    }
-
-    const registerUserWithEmailPassword = (email,password)=>{
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
-    const logInWithEmailPassword = (email,password)=>{
-        return signInWithEmailAndPassword(auth, email, password)
-    }
-
-    const update = (currentUser,willUpdate)=>{
-        return updateProfile(currentUser,willUpdate)
-
-    }
-    const logOutUser = ()=>{
-        return signOut(auth)
-    }
-
-    const authInfo={
-       user,
-       setUser,
-       registerUserWithEmailPassword,
-       logInWithEmailPassword,
-       signInWithGoogle,
-       update,
-       logOutUser,
-       loading,
-       mode,
-       setMode
-    }
-    return (
-        <div>
-            <AuthContext.Provider value={authInfo}>
-                {children}
-            </AuthContext.Provider>
-
-        </div>
-    );
+  const authInfo = {
+    user,
+    setUser,
+    registerUserWithEmailPassword,
+    logInWithEmailPassword,
+    signInWithGoogle,
+    update,
+    logOutUser,
+    loading,
+    mode,
+    setMode,
+  };
+  return (
+    <div>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    </div>
+  );
 };
 
 export default AuthProvider;
