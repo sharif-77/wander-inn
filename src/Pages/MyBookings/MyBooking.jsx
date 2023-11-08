@@ -217,7 +217,7 @@ const MyBooking = ({ room }) => {
 
           <div className="flex flex-col   ">
             <button
-              className="bg-[#14c898f3] py-2 px-4 mt-5 rounded-md  font-bold"
+              className="bg-[#14c898f3] text-white py-2 px-4 mt-5 rounded-md  font-bold"
               type="submit"
             >
               Submit
