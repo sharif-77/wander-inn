@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 const FeaturedRoom = ({room}) => {
     return (
-        <div className="card  bg-base-100 shadow-xl">
+      <div data-aos="fade-left">
+          <div className="card  bg-base-100 shadow-xl" >
         <figure><img className="w-full min-h-[300px] max-h-[300px] " src={room.image} alt="Shoes" /></figure>
         <div className="p-2 space-y-2">
           <h2 className="card-title">{room.name}</h2>
@@ -15,6 +16,7 @@ const FeaturedRoom = ({room}) => {
             <Link to={`/roomDetails/${room._id}`} className="btn btn-success text-white">Book Now</Link>
           </div>
         </div>
+      </div>
       </div>
     );
 };

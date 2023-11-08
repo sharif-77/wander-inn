@@ -4,17 +4,20 @@ import ExclusiveOffers from "../../componenst/ExclusiveOffers/ExclusiveOffers";
 import Testimonials from "../../componenst/Testimonials/Testimonials";
 import FeaturedRooms from "../../componenst/FeaturedRooms/FeaturedRooms";
 import { useEffect } from "react";
+import Aos from "aos";
 
 
 const Home = () => {
   useEffect(() => {
-    // Add custom parallax effect using JavaScript
     const banner = document.querySelector(".parallax-item");
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
-      banner.style.transform = `translateX(${scrollY * 0.1}px)`; // Adjust the factor for the desired effect
+      banner.style.transform = `translateX(${scrollY * 0.1}px)`; 
     });
   }, []);
+  useEffect(()=>{
+    Aos.init()
+},[])
 
   return (
     <main>

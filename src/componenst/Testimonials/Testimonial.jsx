@@ -1,6 +1,7 @@
 const Testimonial = ({ review }) => {
   return (
-    <div className="card  bg-base-100 shadow-xl">
+   <div data-aos="fade-left">
+     <div className="card  bg-base-100 shadow-xl">
       <figure>
         <img
           className="w-full min-h-[300px] max-h-[300px] "
@@ -46,6 +47,7 @@ const Testimonial = ({ review }) => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 
