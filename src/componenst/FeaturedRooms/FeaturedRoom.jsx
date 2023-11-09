@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedRoom = ({room}) => {
     return (
-      <div data-aos="fade-left">
+      <div data-aos="zoom-in">
           <div className="card  bg-base-100 shadow-xl" >
         <figure><img className="w-full min-h-[300px] max-h-[300px] " src={room.image} alt="Shoes" /></figure>
         <div className="p-2 space-y-2">

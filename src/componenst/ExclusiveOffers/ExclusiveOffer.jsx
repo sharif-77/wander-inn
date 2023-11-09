@@ -1,7 +1,8 @@
 import 'aos/dist/aos.css'
 const ExclusiveOffer = ({offer}) => {
     return(
-   <div data-aos="fade-right">
+   <div data-aos="fade-up"
+     data-aos-duration="3000">
          <div className="card  bg-base-100 shadow-xl" >
         <figure><img className="w-full min-h-[300px] max-h-[300px] " src={offer.image} alt="Shoes" /></figure>
         <div className="p-2 space-y-2">

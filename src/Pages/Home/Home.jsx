@@ -8,13 +8,16 @@ import Aos from "aos";
 
 
 const Home = () => {
+
   useEffect(() => {
     const banner = document.querySelector(".parallax-item");
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
-      banner.style.transform = `translateX(${scrollY * 0.1}px)`; 
+      banner.style.transform = `translateY(${scrollY * 0.5}px)`; 
     });
   }, []);
+  
+  
   useEffect(()=>{
     Aos.init()
 },[])
@@ -30,7 +33,6 @@ const Home = () => {
           <Banner />
         </div>
 
-        {/* Other content here */}
         <div className="w-4/5 mx-auto mt-20">
           <FeaturedRooms />
         </div>

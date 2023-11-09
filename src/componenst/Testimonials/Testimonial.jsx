@@ -1,6 +1,6 @@
 const Testimonial = ({ review }) => {
   return (
-    <div data-aos="fade-left">
+    <div data-aos="fade-down">
       <div className="card  bg-base-100 shadow-xl">
         <figure className="py-5">
           <div className="avatar">

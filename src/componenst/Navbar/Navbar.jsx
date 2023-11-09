@@ -7,7 +7,7 @@ const Navbar = () => {
     return(
         <div className="py-6">
 
-            <div className="w-4/5 mx-auto flex flex-col gap-10 lg:flex-row lg:gap-0 items-center justify-between">
+            <div className="w-4/5 mx-auto flex flex-col  gap-10 lg:flex-row lg:gap-0 items-center justify-between">
 
                 <div className="flex flex-col items-center justify-center gap-1">
                     <img className="w-16 rounded-full" src="https://i.ibb.co/2NZJyW9/3d7581-6a6d532daaa743f08b822f674fd45f29-mv2-1.png" alt="" />
@@ -15,7 +15,7 @@ const Navbar = () => {
                     
                 </div>
                 
-               <div className="uppercase">
+               <div className="uppercase flex  text-xs lg:text-base">
                <NavLink to='/' className={({isActive})=>`${isActive&&`  bg-[#220032] text-white `} py-2 px-5 rounded-md font-bold `}>Home</NavLink>
                 <NavLink to='/rooms' className={({isActive})=>`${isActive&&`  bg-[#220032] text-white `} py-2 px-5 rounded-md font-bold `}>Rooms</NavLink>
                 <NavLink to='/myBookings' className={({isActive})=>`${isActive&&`  bg-[#220032] text-white `} py-2 px-5 rounded-md font-bold `}>My Bookings</NavLink>
